@@ -102,8 +102,8 @@ i2c uart gpio 都比较简单
 
 ### 效果
 ![下位机](/RES/XWJ.jpg)
-![下位机1](/RES/MO.PNG)
-![下位机2](/RES/db.PNG)
+![下位机1](/RES/MO.png)
+![下位机2](/RES/db.png)
 
 
 
