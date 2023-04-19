@@ -1,0 +1,19 @@
+"E:\developmentEnvironment\CLion 2022.1.2\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=E:/mingw64/bin/mingw32-make.exe -DCMAKE_C_COMPILER=E:/developmentEnvironment/gcc-arm-none-eabi/bin/arm-none-eabi-gcc.exe -DCMAKE_CXX_COMPILER=E:/developmentEnvironment/gcc-arm-none-eabi/bin/arm-none-eabi-g++.exe -G "CodeBlocks - MinGW Makefiles" -S C:\Users\A9201\Desktop\GraduationProject\wd\mcu2\gp_mcu2 -B C:\Users\A9201\Desktop\GraduationProject\wd\mcu2\gp_mcu2\cmake-build-debug
+-- The C compiler identification is GNU 10.3.1
+-- The CXX compiler identification is GNU 10.3.1
+-- The ASM compiler identification is GNU
+-- Found assembler: E:/developmentEnvironment/gcc-arm-none-eabi/bin/arm-none-eabi-gcc.exe
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: E:/developmentEnvironment/gcc-arm-none-eabi/bin/arm-none-eabi-gcc.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: E:/developmentEnvironment/gcc-arm-none-eabi/bin/arm-none-eabi-g++.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Minimal optimization, debug info included
+-- Configuring done
+-- Generating done
+-- Build files have been written to: C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/cmake-build-debug
