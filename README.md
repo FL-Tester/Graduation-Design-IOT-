@@ -8,7 +8,8 @@
 3. 上位机采用pyqt5 
 
 看图 不多bb
-![下位机](/RES/ee.png)
+![分层](/RES/LAYER.png)
+![框图](/RES/ee.png)
 
 ### 实现
 #### MCU1 (vscode + idf)
@@ -112,8 +113,150 @@ i2c uart gpio 都比较简单
 
 ### 效果
 ![下位机](/RES/XWJ.jpg)
-![下位机1](/RES/MO.png)
-![下位机2](/RES/db.png)
+![上位机1](/RES/MO.png)
+![上位机2](/RES/db.png)
+
+### 难点
+#### 数据的上下行
+##### 数据的上行:
+1. 终端节点通过lora发送给网关,
+2. 网关通过基于tcp的mqtt协议发送给服务器，
+3. 上位机通过订阅mqtt主题接收数据 
+4. 通过py的数据库操作 将数据存入数据库
+
+##### 数据的下行:
+1. 上位机发布mqtt主题
+部分代码:
+```python 
+//控制按钮绑定函数
+self.execute_button = QPushButton("执行")
+self.execute_button.clicked.connect(self.execute_settings)
+vbox_servo_control.addWidget(self.execute_button)
+vbox_monitoring.addWidget(self.servo_control_panel)
+//类中函数
+def execute_settings(self):
+        if self.mode_combo.currentText() == "手动模式":
+            mode = 1
+        else:
+            mode = 0
+        if self.switch_combo.currentText() == "开":
+            switch = 1
+        else:
+            switch = 0
+        if self.node_combo.currentText() == "终端节点1":
+            node = 1
+        else:
+            node = 2
+        message = {
+            "mode": mode,
+            "switch": switch,
+            "node": node
+        }
+        self.mqtt_client.publish("/CD/SWJ", json.dumps(message))
+```
+2. 网关订阅mqtt主题 
+```c
+case MQTT_EVENT_CONNECTED:
+            ESP_LOGI(TAG, "MQTT_EVENT_CONNECTED");
+            esp_mqtt_client_publish(client_handle, "/cd/esp32/test", "mqtt connected!", 0, 0, 0);
+            esp_mqtt_client_subscribe(client_handle, "/CD/SWJ", 0);
+            //通知mqtt任务
+            xTaskNotify(mqtt_publish_task_handle, 0x01, eNoAction);
+            break;
+```
+3. 在mqtt事件中调用lora发送数据给终端节点
+```c
+case MQTT_EVENT_DATA:
+            ESP_LOGI(TAG, "MQTT_EVENT_DATA");
+            printf("TOPIC=%.*s\r\n", event->topic_len, event->topic);
+            printf("DATA=%.*s\r\n", event->data_len, event->data);
+            cJSON *json = cJSON_Parse(event->data);
+            uint8_t control_byte = 0x00;
+            if ( (cJSON_GetObjectItem(json, "node")->valueint) == 1) {
+                control_byte |= (0x01 << 6);
+                controlbuf[1] = 0x0c;
+            } else if ( (cJSON_GetObjectItem(json, "node")->valueint) == 2) {
+                control_byte |= (0x02 << 6);
+                controlbuf[1] = 0x0d;
+            }
+            if (cJSON_GetObjectItem(json, "mode")->valueint == 1) {
+                control_byte |= (0x01 << 4);
+            } else if (cJSON_GetObjectItem(json, "mode")->valueint == 2) {
+                control_byte |= (0x02 << 4);
+            }
+            if (cJSON_GetObjectItem(json, "switch")->valueint == 1) {
+                control_byte |= 0x01;
+            } else if (cJSON_GetObjectItem(json, "switch")->valueint == 2) {
+                control_byte |= 0x02;
+            }
+            // Print control byte
+            printf("control_byte = %x\n", control_byte);
+            controlbuf[3] = control_byte;
+            uart_write_bytes (UART_NUM_1, controlbuf, 4);
+            printf("发送完成了\n");
+            cJSON_Delete(json);
+            break;
+```
+3. 终端节点通过串口接收 这个接收只能是stm32那边中断方式 或者 DMA方式
+```c
+//dma接收中断
+void USART2_IRQHandler(void)
+{
+    /* USER CODE BEGIN USART2_IRQn 0 */
+    /* USER CODE END USART2_IRQn 0 */
+    /* USER CODE BEGIN USART2_IRQn 1 */
+    res = __HAL_UART_GET_FLAG(&huart2, UART_FLAG_IDLE);
+    if((res != RESET)){
+        HAL_UART_DMAStop(&huart2);
+        temp = __HAL_DMA_GET_COUNTER(&hdma_usart2_rx);
+        lora_recv_len = BUFFER_SIZE_MAX - temp;
+        lora_recv_flag = 1;
+        event_flag = EVENT_LORA_RECV;
+        __HAL_UART_CLEAR_IDLEFLAG(&huart2);
+    }
+    //HAL_UART_IRQHandler(&huart2);
+    /* USER CODE END USART2_IRQn 1 */
+}
+//接收任务
+void recv_control_task(void){
+    uint8_t control_byte = lora_receive_buffer[0];
+    printf("4.LORA接收任务:开始接收!\n"); //log
+    uint8_t node = (control_byte & 0xC0) >> 6;
+    uint8_t mode = (control_byte & 0x30) >> 4;
+    uint8_t switch_status = control_byte & 0x0F;
+    if (node == MCU_NUM){
+        if (mode == 1) {
+            auto_mode = 1;
+            if (switch_status == 1) {
+                sensor_data.water_pump = four;
+                __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, sensor_data.water_pump);
+            } else if (switch_status == 0) {
+                sensor_data.water_pump = stop;
+                __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, sensor_data.water_pump);
+            }
+        }else if (mode == 0)
+            auto_mode = 0;
+    }
+    //清除
+    lora_recv_flag = 0;
+    lora_recv_len = 0;
+    HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+    memset(lora_receive_buffer, 0, BUFFER_SIZE_MAX);
+    HAL_UART_Receive_DMA(&huart2, lora_receive_buffer, BUFFER_SIZE_MAX);
+    event_flag = EVENT_NULL;
+    CurrentState = Idel; //状态切换
+}
+```
+
+#### lora模块的选择错误
+不应该选择正点原子的lora模块 原因是他用起来 类似UDP
+没用可靠性 无论是他的定向传输的透明传输 
+当然也可以 自己编写对应的应答机制 这不是变成了造轮子吗 自己写一个lorawan？？ 不大可能
+应该选择支持lorawan的芯片作为通信模块
+最骚的 这个模块的数据出货 不是正常的出货 是一个一个字节出货的 处理起来 中断方式比较合适
+
+
+
 
 
 
