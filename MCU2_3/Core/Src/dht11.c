@@ -56,7 +56,6 @@ uint8_t DHT11_Check(void){
 }
 
 uint8_t DHT11_Read_Bit(void){
-
     uint8_t retry=0;
     while(GPIO_PIN_SET == HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_5) && retry<100)
     {
@@ -64,7 +63,6 @@ uint8_t DHT11_Read_Bit(void){
         Delay_us(1);
     }
     retry=0;
-
     while(GPIO_PIN_RESET == HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_5) && retry<100)
     {
         retry++;

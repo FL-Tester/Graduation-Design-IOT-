@@ -275,6 +275,37 @@ CMakeFiles/gp_mcu2.elf.dir/Core/Src/i2c.c.obj
 
 CMakeFiles/gp_mcu2.elf.dir/Core/Src/main.c.obj
  C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Core/Src/main.c
+ E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/stdio.h
+ E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/_ansi.h
+ E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/newlib.h
+ E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/_newlib_version.h
+ E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/config.h
+ E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/machine/ieeefp.h
+ E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/features.h
+ E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/cdefs.h
+ E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/machine/_default_types.h
+ E:/developmentEnvironment/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h
+ E:/developmentEnvironment/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h
+ E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/reent.h
+ E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/_ansi.h
+ E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/_types.h
+ E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/machine/_types.h
+ E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/lock.h
+ E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/types.h
+ E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/_stdint.h
+ E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/machine/endian.h
+ E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/machine/_endian.h
+ E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/select.h
+ E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/_sigset.h
+ E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/_timeval.h
+ E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/timespec.h
+ E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/_timespec.h
+ E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/_pthreadtypes.h
+ E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/sched.h
+ E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/machine/types.h
+ E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/stdio.h
+ C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Core/Inc/config.h
+ C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Core/Inc/dht11.h
  C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Core/Inc/main.h
  C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h
  C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Core/Inc/stm32f1xx_hal_conf.h
@@ -285,17 +316,12 @@ CMakeFiles/gp_mcu2.elf.dir/Core/Src/main.c.obj
  C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Drivers/CMSIS/Include/core_cm3.h
  E:/developmentEnvironment/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h
  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/stdint.h
- E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/machine/_default_types.h
- E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/features.h
- E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/_newlib_version.h
  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/_intsup.h
- E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/_stdint.h
  C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Drivers/CMSIS/Include/cmsis_version.h
  C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Drivers/CMSIS/Include/cmsis_compiler.h
  C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Drivers/CMSIS/Include/cmsis_gcc.h
  C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h
  C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
- E:/developmentEnvironment/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h
  C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h
  C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h
  C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h
@@ -312,33 +338,6 @@ CMakeFiles/gp_mcu2.elf.dir/Core/Src/main.c.obj
  C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
  C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
  C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
- E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/stdio.h
- E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/_ansi.h
- E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/newlib.h
- E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/config.h
- E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/machine/ieeefp.h
- E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/cdefs.h
- E:/developmentEnvironment/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h
- E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/reent.h
- E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/_ansi.h
- E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/_types.h
- E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/machine/_types.h
- E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/lock.h
- E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/types.h
- E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/machine/endian.h
- E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/machine/_endian.h
- E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/select.h
- E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/_sigset.h
- E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/_timeval.h
- E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/timespec.h
- E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/_timespec.h
- E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/_pthreadtypes.h
- E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/sched.h
- E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/machine/types.h
- E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/stdio.h
- C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Core/Inc/config.h
- C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Core/Inc/dht11.h
- C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Core/Inc/main.h
  C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Core/Inc/bh1750.h
  C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Core/Inc/soil_humi.h
  C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Core/Inc/adc.h
@@ -347,6 +346,7 @@ CMakeFiles/gp_mcu2.elf.dir/Core/Src/main.c.obj
  C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Core/Inc/usart.h
  C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Core/Inc/gpio.h
  C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Core/Inc/dma.h
+ C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Core/Inc/event.h
  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/string.h
  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/_locale.h
  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/strings.h
@@ -474,6 +474,7 @@ CMakeFiles/gp_mcu2.elf.dir/Core/Src/stm32f1xx_it.c.obj
  C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
  C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
  C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Core/Inc/stm32f1xx_it.h
+ C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Core/Inc/event.h
 
 CMakeFiles/gp_mcu2.elf.dir/Core/Src/syscalls.c.obj
  C:/Users/A9201/Desktop/GraduationProject/wd/mcu2/gp_mcu2/Core/Src/syscalls.c

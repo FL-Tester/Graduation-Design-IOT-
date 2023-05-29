@@ -11,14 +11,17 @@
 #include "gpio.h"
 #include "dma.h"
 #include "main.h"
+#include "event.h"
 
 
+
+#define MCU_NUM         2
 #define READTIME        30
 #define MCU_DEFAULT     0
 #define debug           1
 #define DHT11_DELAY     (1000 / READTIME + 10)  // > 1s
 #define TRAN            0.66
-#define BUFFER_SIZE_MAX 100
+#define BUFFER_SIZE_MAX 1024
 
 
 typedef struct{
@@ -42,7 +45,8 @@ enum State{
     Idel = 0,
     ReadData,
     ControlServo,
-    SendData
+    SendData,
+    RecvControl
 };
 
 enum lmit_value{  //温湿度阈值 档位 20 60 70 80 90
@@ -54,21 +58,13 @@ enum lmit_value{  //温湿度阈值 档位 20 60 70 80 90
 };
 
 //定义公共事件
-typedef enum{
-    EVENT_NULL = 0,
-    EVENT_READ_DATA,
-    EVENT_CONTROL_SERVO,
-    EVENT_SEND_DATA,
-    EVENT_LORA_RECV
-} event_t;
+
 
 //定义一个状态机的消息队列
 typedef struct{
     event_t type;
     send_data_t data;
 } msg_t;
-
-
 // 控制水泵的参数 因为土壤湿度和湿度代表目前代表湿润 而光照强度和温度到底一定范围后代表适合光合作用
 static float soil_humi_weight   = 1.5;
 static float temp_weight        = -0.1;
@@ -80,9 +76,6 @@ static uint8_t humi_min         = 40;
 static uint8_t humi_max         = 80;
 static uint16_t light_min       = 1000;
 static uint16_t light_max       = 60000;
-
-uint8_t lora_recv_event_flag = 0;   //lora接收事件标志  优先级
-uint8_t lora_recv_flag = 0;         //lora接收标志
 char LoRaRxBuffer[100];
 
 

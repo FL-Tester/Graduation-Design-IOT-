@@ -2,7 +2,6 @@
 #include "i2c.h"
 #include "stdio.h"
 
-
 void bh1750_init(void){
     uint8_t data;
     data = BHPowOn;

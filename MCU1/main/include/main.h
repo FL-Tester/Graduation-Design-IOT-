@@ -27,17 +27,16 @@ static const char *TAG = "gp_mcu1";
 #define RD_BUF_SIZE (BUF_SIZE)
 static QueueHandle_t uart_queue;
 
-ip4_addr_t dns_server = {
-    .addr = IPADDR4_INIT_BYTES(192, 168, 1, 1)
-};
 
 static wifi_sta_config_t wifi_sta_config = {            // sta wifi config  自定义
-        .ssid = "FengLe",
+        .ssid = "FengLE",
         .password = "987654321",
 };
 esp_mqtt_client_config_t mqtt_config = {                //mqtt config  服务器地址 不能改
-        .uri = "mqtt://175.178.79.144",
-        .port = 1883
+        .uri = "mqtt://fengle-bg.club",
+        .port = 1883,
+        .username = "esp32_gateway",
+        .password = "123456"
 };
 typedef struct {                //mqtt publish 数据结构体
     char *topic;                //主题

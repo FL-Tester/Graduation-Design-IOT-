@@ -1,34 +1,39 @@
-#include "main.h"
 #include "stdio.h"
 #include "config.h"
 #include "string.h"
 
-msg_t msg[10];                      //消息队列
-event_t event_flag = EVENT_NULL;    //事件标志
+volatile event_t event_flag = EVENT_NULL;       //事件标志
 send_data_t sensor_data;
-enum State CurrentState = Idel;   // 当前状态
-enum motor_speed motor_speed = stop;    // 水泵默认档位
-
+enum State CurrentState = Idel;                 // 当前状态
+enum motor_speed motor_speed = stop;            // 水泵默认档位
+uint8_t lora_receive_buffer[BUFFER_SIZE_MAX];   //lora接收缓冲区
+uint8_t lora_recv_flag = 0;                     //lora接收标志
+uint8_t lora_recv_len = 0;                      //lora接收长度
+uint8_t auto_mode = 1;
 int main(void){
-    hw_init();
+    hw_init();  //硬件初始化
     while (1){
         switch (CurrentState) {
             case ReadData:
-                read_sensor_data_task();
+                read_sensor_data_task();  // 读取传感器数据
                 break;
             case ControlServo:
-                control_servo_task();
+                control_servo_task();     // 控制水泵
                 break;
             case SendData:
-                send_sensor_data_task();
+                send_sensor_data_task();  // 发送传感器数据
+                break;
+            case RecvControl:
+                recv_control_task();      // 接收控制命令
                 break;
             default:
-                idel_task();
+                idel_task();              // 空闲任务
                 break;
         }
+
+
     }
 }
-
 //定时器 驱动数据读取和发送
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
     static unsigned char ledState = 0, count = 0;
@@ -36,7 +41,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
         event_flag = EVENT_READ_DATA;
         count++;
     }
-    if (count == LORATIME){
+    if (count == 3){
         event_flag = EVENT_SEND_DATA;
         count = 0;
     }
@@ -56,7 +61,7 @@ void idel_task(void){
                 break;
             case EVENT_LORA_RECV:
                 event_flag = EVENT_NULL;
-                CurrentState = ControlServo;
+                CurrentState = RecvControl;
                 break;
             default:
                 break;
@@ -87,56 +92,59 @@ void read_sensor_data_task(void){
 }
 //控制舵机任务  //需要继续优化 因为没有参考温湿度和光照强度的值
 void control_servo_task(void){
-        // 归一化
-        float soil_humi_factor = sensor_data.soil_humi / 100.0f; //土壤湿度
-        float clamped_light = sensor_data.light; //关照强度
-        if (clamped_light < light_min) {      //关照强度作用范围
-            clamped_light = light_min;
-        } else if (clamped_light > light_max) {
-            clamped_light = light_max;
-        }
-        float  light_factor = (clamped_light - light_min) / (light_max - light_min);
-        float clamped_temp = sensor_data.temp;   //温湿度
-        float clamped_humi = sensor_data.humi;
-        if (clamped_temp < temp_min) {
-            clamped_temp = temp_min;
-        } else if (clamped_temp > temp_max) {
-            clamped_temp = temp_max;
-        }
-        if (clamped_humi < humi_min) {
-            clamped_humi = humi_min;
-        } else if (clamped_humi > humi_max) {
-            clamped_humi = humi_max;
-        }
-        float  temp_factor = (clamped_temp - temp_min) / (temp_max - temp_min);
-        float  humi_factor = (clamped_humi - humi_min) / (humi_max - humi_min);
-        float combined_factor = soil_humi_weight * soil_humi_factor +
-                                   temp_weight * temp_factor +
-                                   humi_weight * humi_factor +
-                                   light_weight * light_factor;
+    if (auto_mode == 1)
+        goto controlend;
+    // 归一化
+    float soil_humi_factor = sensor_data.soil_humi / 100.0f; //土壤湿度
+    float clamped_light = sensor_data.light; //关照强度
+    if (clamped_light < light_min) {      //关照强度作用范围
+        clamped_light = light_min;
+    } else if (clamped_light > light_max) {
+        clamped_light = light_max;
+    }
+    float  light_factor = (clamped_light - light_min) / (light_max - light_min);
+    float clamped_temp = sensor_data.temp;   //温湿度
+    float clamped_humi = sensor_data.humi;
+    if (clamped_temp < temp_min) {
+        clamped_temp = temp_min;
+    } else if (clamped_temp > temp_max) {
+        clamped_temp = temp_max;
+    }
+    if (clamped_humi < humi_min) {
+        clamped_humi = humi_min;
+    } else if (clamped_humi > humi_max) {
+        clamped_humi = humi_max;
+    }
+    float  temp_factor = (clamped_temp - temp_min) / (temp_max - temp_min);
+    float  humi_factor = (clamped_humi - humi_min) / (humi_max - humi_min);
+    float combined_factor = soil_humi_weight * soil_humi_factor +
+                            temp_weight * temp_factor +
+                            humi_weight * humi_factor +
+                            light_weight * light_factor;
 
-        // 根据 combined_factor 计算水泵输出挡位
-        if (combined_factor < 0.2) {
-            sensor_data.water_pump = four;
-        } else if (combined_factor < 0.25) {
-            sensor_data.water_pump = three;
-        } else if (combined_factor < 0.4) {
-            sensor_data.water_pump = two;
-        } else if (combined_factor < 0.5) {
-            sensor_data.water_pump = one;
-        } else {
-            sensor_data.water_pump = stop;
-        }
-
-        //舵机模拟水流大小
-        __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, sensor_data.water_pump);
+    // 根据 combined_factor 计算水泵输出挡位
+    if (combined_factor < 0.2) {
+        sensor_data.water_pump = four;
+    } else if (combined_factor < 0.25) {
+        sensor_data.water_pump = three;
+    } else if (combined_factor < 0.4) {
+        sensor_data.water_pump = two;
+    } else if (combined_factor < 0.5) {
+        sensor_data.water_pump = one;
+    } else {
+        sensor_data.water_pump = stop;
+    }
+    //舵机模拟水流大小
+    __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, sensor_data.water_pump);
 
 #if debug
-        printf("2.控制舵机任务:pidout = %f\n", sensor_data.water_pump); //log
-        printf("soil_humi_factor:%f,temp_factor:%f,humi_factor:%f,light_factor:%f,combined_factor:%f\n",
-               soil_humi_factor, temp_factor, humi_factor, light_factor, combined_factor);
+    printf("2.控制舵机任务:pidout = %f\n", sensor_data.water_pump); //log
+    printf("soil_humi_factor:%f,temp_factor:%f,humi_factor:%f,light_factor:%f,combined_factor:%f\n",
+           soil_humi_factor, temp_factor, humi_factor, light_factor, combined_factor);
 #endif
 
+
+controlend:
     event_flag = EVENT_NULL;
     CurrentState = Idel;
 }
@@ -149,15 +157,15 @@ void send_sensor_data_task(void){
     lora_send_buf[7] = sensor_data.soil_humi & 0xff;
     lora_send_buf[8] = sensor_data.light >> 8;
     lora_send_buf[9] = sensor_data.light & 0xff;
-    if (sensor_data.water_pump == 150)
+    if (sensor_data.water_pump == stop)
         lora_send_buf[10] = 0;
-    else if (sensor_data.water_pump == 160)
+    else if (sensor_data.water_pump == one)
         lora_send_buf[10] = 1;
-    else if (sensor_data.water_pump == 180)
+    else if (sensor_data.water_pump == two)
         lora_send_buf[10] = 2;
-    else if (sensor_data.water_pump == 200)
+    else if (sensor_data.water_pump == three)
         lora_send_buf[10] = 3;
-    else if (sensor_data.water_pump == 250)
+    else if (sensor_data.water_pump == four)
         lora_send_buf[10] = 4;
     lora_send_buf[11] = lora_send_buf[4] + lora_send_buf[5] + lora_send_buf[6] +
                         lora_send_buf[7] + lora_send_buf[8] +
@@ -169,10 +177,45 @@ void send_sensor_data_task(void){
     CurrentState = Idel; //状态切换
 }
 
+//lora接收任务
+void recv_control_task(void){
+    uint8_t control_byte = lora_receive_buffer[0];
+    printf("4.LORA接收任务:开始接收!\n"); //log
+    printf ("%x\n", lora_receive_buffer[0]);
+    uint8_t node = (control_byte & 0xC0) >> 6;
+    uint8_t mode = (control_byte & 0x30) >> 4;
+    uint8_t switch_status = control_byte & 0x0F;
+    //打印node mode switch_status
+    printf("node:%d,mode:%d,switch_status:%d\n", node, mode, switch_status);
+
+    if (node == MCU_NUM){
+        if (mode == 1) {
+            auto_mode = 1;
+            if (switch_status == 1) {
+                sensor_data.water_pump = four;
+                __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, sensor_data.water_pump);
+            } else if (switch_status == 0) {
+                sensor_data.water_pump = stop;
+                __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, sensor_data.water_pump);
+            }
+        }else if (mode == 0)
+            auto_mode = 0;
+    }
+    //清除
+    lora_recv_flag = 0;
+    lora_recv_len = 0;
+    HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+    memset(lora_receive_buffer, 0, BUFFER_SIZE_MAX);
+    HAL_UART_Receive_DMA(&huart2, lora_receive_buffer, BUFFER_SIZE_MAX);
+    event_flag = EVENT_NULL;
+    CurrentState = Idel; //状态切换
+}
+
 void hw_init(void){
     HAL_Init();
     SystemClock_Config();
     MX_GPIO_Init();           //led dht11
+    MX_DMA_Init();          //DMA初始化  tnnd 找半天 就说为什么可以触发中断 但是不可以收到准确信息 原来是生成后 复制原来的 没有复制DMA
     MX_ADC1_Init();           //土壤湿度
     MX_I2C1_Init();           //bh1750
     MX_USART1_UART_Init();    //log
@@ -182,11 +225,15 @@ void hw_init(void){
     MX_TIM4_Init();           //定时器
     bh1750_init();
     HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
-    HAL_Delay(1000);
     HAL_TIM_Base_Start_IT(&htim4);
+    __HAL_UART_ENABLE_IT(&huart2, UART_IT_IDLE);
+    __HAL_UART_CLEAR_IDLEFLAG(&huart2);
+    HAL_UART_Receive_DMA(&huart2, lora_receive_buffer, BUFFER_SIZE_MAX);
+
 }
 
-void SystemClock_Config(void){
+void SystemClock_Config(void){ //
+    ;
     RCC_OscInitTypeDef RCC_OscInitStruct = {0};
     RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
     RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
@@ -229,7 +276,7 @@ void SystemClock_Config(void){
 void Error_Handler(void){
     /* USER CODE BEGIN Error_Handler_Debug */
     /* User can add his own implementation to report the HAL error return state */
-    __disable_irq();
+    __disable_irq();   //关中断
     while (1)
     {
     }
@@ -245,3 +292,24 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
+
+
+
+/* USER CODE BEGIN Header */
+/**
+  ******************************************************************************
+  * @file    stm32f1xx_it.c
+  * @brief   Interrupt Service Routines.
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2023 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
+  */
+/* USER CODE END Header */

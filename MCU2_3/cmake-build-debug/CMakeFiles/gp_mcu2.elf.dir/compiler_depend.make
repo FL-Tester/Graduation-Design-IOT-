@@ -268,6 +268,37 @@ CMakeFiles/gp_mcu2.elf.dir/Core/Src/i2c.c.obj: ../Core/Src/i2c.c \
   ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 
 CMakeFiles/gp_mcu2.elf.dir/Core/Src/main.c.obj: ../Core/Src/main.c \
+  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/stdio.h \
+  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/_ansi.h \
+  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/newlib.h \
+  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/_newlib_version.h \
+  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/config.h \
+  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/machine/ieeefp.h \
+  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/features.h \
+  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/cdefs.h \
+  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/machine/_default_types.h \
+  E:/developmentEnvironment/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h \
+  E:/developmentEnvironment/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h \
+  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/reent.h \
+  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/_ansi.h \
+  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/_types.h \
+  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/machine/_types.h \
+  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/lock.h \
+  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/types.h \
+  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/_stdint.h \
+  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/machine/endian.h \
+  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/machine/_endian.h \
+  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/select.h \
+  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/_sigset.h \
+  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/_timeval.h \
+  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/timespec.h \
+  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/_timespec.h \
+  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/_pthreadtypes.h \
+  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/sched.h \
+  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/machine/types.h \
+  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/stdio.h \
+  ../Core/Inc/config.h \
+  ../Core/Inc/dht11.h \
   ../Core/Inc/main.h \
   ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
   ../Core/Inc/stm32f1xx_hal_conf.h \
@@ -278,17 +309,12 @@ CMakeFiles/gp_mcu2.elf.dir/Core/Src/main.c.obj: ../Core/Src/main.c \
   ../Drivers/CMSIS/Include/core_cm3.h \
   E:/developmentEnvironment/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
   E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/stdint.h \
-  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/machine/_default_types.h \
-  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/features.h \
-  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/_newlib_version.h \
   E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/_intsup.h \
-  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/_stdint.h \
   ../Drivers/CMSIS/Include/cmsis_version.h \
   ../Drivers/CMSIS/Include/cmsis_compiler.h \
   ../Drivers/CMSIS/Include/cmsis_gcc.h \
   ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h \
   ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h \
-  E:/developmentEnvironment/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h \
   ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h \
   ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h \
   ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h \
@@ -305,33 +331,6 @@ CMakeFiles/gp_mcu2.elf.dir/Core/Src/main.c.obj: ../Core/Src/main.c \
   ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
   ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
   ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
-  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/stdio.h \
-  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/_ansi.h \
-  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/newlib.h \
-  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/config.h \
-  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/machine/ieeefp.h \
-  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/cdefs.h \
-  E:/developmentEnvironment/gcc-arm-none-eabi/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h \
-  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/reent.h \
-  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/_ansi.h \
-  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/_types.h \
-  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/machine/_types.h \
-  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/lock.h \
-  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/types.h \
-  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/machine/endian.h \
-  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/machine/_endian.h \
-  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/select.h \
-  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/_sigset.h \
-  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/_timeval.h \
-  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/timespec.h \
-  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/_timespec.h \
-  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/_pthreadtypes.h \
-  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/sched.h \
-  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/machine/types.h \
-  E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/stdio.h \
-  ../Core/Inc/config.h \
-  ../Core/Inc/dht11.h \
-  ../Core/Inc/main.h \
   ../Core/Inc/bh1750.h \
   ../Core/Inc/soil_humi.h \
   ../Core/Inc/adc.h \
@@ -340,6 +339,7 @@ CMakeFiles/gp_mcu2.elf.dir/Core/Src/main.c.obj: ../Core/Src/main.c \
   ../Core/Inc/usart.h \
   ../Core/Inc/gpio.h \
   ../Core/Inc/dma.h \
+  ../Core/Inc/event.h \
   E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/string.h \
   E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/_locale.h \
   E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/strings.h \
@@ -463,7 +463,8 @@ CMakeFiles/gp_mcu2.elf.dir/Core/Src/stm32f1xx_it.c.obj: ../Core/Src/stm32f1xx_it
   ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
   ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
   ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
-  ../Core/Inc/stm32f1xx_it.h
+  ../Core/Inc/stm32f1xx_it.h \
+  ../Core/Inc/event.h
 
 CMakeFiles/gp_mcu2.elf.dir/Core/Src/syscalls.c.obj: ../Core/Src/syscalls.c \
   E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/stat.h \
@@ -1466,6 +1467,8 @@ E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/sys/stdio.h:
 ../Core/Inc/soil_humi.h:
 
 ../Core/Inc/usart.h:
+
+../Core/Inc/event.h:
 
 E:/developmentEnvironment/gcc-arm-none-eabi/arm-none-eabi/include/string.h:
 

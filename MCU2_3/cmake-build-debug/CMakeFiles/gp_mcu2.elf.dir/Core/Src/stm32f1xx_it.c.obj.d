@@ -37,4 +37,5 @@ CMakeFiles/gp_mcu2.elf.dir/Core/Src/stm32f1xx_it.c.obj: \
  C:\Users\A9201\Desktop\GraduationProject\wd\mcu2\gp_mcu2\Drivers\STM32F1xx_HAL_Driver\Inc/stm32f1xx_hal_tim.h \
  C:\Users\A9201\Desktop\GraduationProject\wd\mcu2\gp_mcu2\Drivers\STM32F1xx_HAL_Driver\Inc/stm32f1xx_hal_tim_ex.h \
  C:\Users\A9201\Desktop\GraduationProject\wd\mcu2\gp_mcu2\Drivers\STM32F1xx_HAL_Driver\Inc/stm32f1xx_hal_uart.h \
- C:\Users\A9201\Desktop\GraduationProject\wd\mcu2\gp_mcu2\Core\Inc/stm32f1xx_it.h
+ C:\Users\A9201\Desktop\GraduationProject\wd\mcu2\gp_mcu2\Core\Inc/stm32f1xx_it.h \
+ C:\Users\A9201\Desktop\GraduationProject\wd\mcu2\gp_mcu2\Core\Inc/event.h

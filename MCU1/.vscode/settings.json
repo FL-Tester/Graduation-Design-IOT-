@@ -24,7 +24,23 @@
         "esp_netif_ip_addr.h": "c",
         "esp_system.h": "c",
         "queue.h": "c",
-        "esp_compiler.h": "c"
+        "esp_compiler.h": "c",
+        "i2c.h": "c",
+        "esp_log.h": "c",
+        "random": "c",
+        "functional": "c",
+        "cdefs.h": "c",
+        "*.tcc": "c",
+        "deque": "c",
+        "list": "c",
+        "string": "c",
+        "unordered_map": "c",
+        "unordered_set": "c",
+        "vector": "c",
+        "system_error": "c",
+        "*.ipp": "c",
+        "complex": "c",
+        "gpio.h": "c"
     },
     "idf.flashType": "UART"
 }
